@@ -16,7 +16,8 @@ SELECT emp_no as "Employee #", birth_date as "Birthday", first_name as "First Na
                           first_name sütununun adini "First Name" olarak yazdir. */
 
 SELECT CONCAT(emp_no, ' is a ', title) as "Employee Title" from "public"."titles";
-/* titles tablosundaki her bir satir icin, emp_no ve title sütunlarindaki degerleri alir ve parantez icinde yazili cümleyi satir satir tablo seklinde yazdirir, olusturulan bu yeni tablonun adini da "Employee Title" koyar */
+/* titles tablosundaki her bir satir icin, emp_no ve title sütunlarindaki degerleri alir ve parantez icinde yazili cümleyi satir satir tablo seklinde yazdirir,
+olusturulan bu yeni tablonun adini da "Employee Title" koyar */
 
 SELECT emp_no, CONCAT(emp_no, ' is a ', title) as "Employee Title" from "public"."titles";
 /* Bu ise ilk sütun olarak emp_no sütununu belirler, ikinci sütun olarak yanina Employee Title isimli sütunu yerlestirir. */
@@ -36,7 +37,8 @@ SELECT sum(salary) FROM "public"."salaries";
 SELECT first_name, last_name from "public"."employees"
 WHERE (first_name = 'Mayumi' AND last_name = 'Schueller')
 or (first_name = 'Bezalel' AND last_name = 'Simmel');
-/* employees tablosunda first_name ve last_name sütunlarini bana göster, fakat bu tabloyu first_name'in 'Mayumi', last_name'in 'Schueller' olmasina; ayrica first_name'in 'Bezalel', last_name'in 'Simmel' olmasina göre filtrele. */
+/* employees tablosunda first_name ve last_name sütunlarini bana göster, fakat bu tabloyu first_name'in 'Mayumi', last_name'in 'Schueller' olmasina;
+ayrica first_name'in 'Bezalel', last_name'in 'Simmel' olmasina göre filtrele. */
 
 SELECT * from "public"."customers" WHERE gender = 'F' and state = 'OR' or gender = 'F' and state = 'NY';
 /* Bu iki komut ayni calisir. */
@@ -60,7 +62,9 @@ SELECT * from "public"."customers" WHERE age BETWEEN 55 and 66;
 SELECT * from "public"."customers" WHERE age in (55, 66, 77, 88);
 /* customers tablosundaki age degeri 55, 66, 77, 88 olanlari listeler. */
 
-SELECT * from "public"."customers" WHERE firstname like 'M%'; /* '%M', '%M%', '_MA%', 'M_%_%' (M ile baslayan ve en az üc basamaga sahip), 'M_____T' (M ile baslayan T ile biten 7 harfli) (LIKE yerine ILIKE yazarsak büyük kücük harf önemsemeden arar.)*/
+SELECT * from "public"."customers" WHERE firstname like 'M%';
+/* '%M', '%M%', '_MA%', 'M_%_%' (M ile baslayan ve en az üc basamaga sahip),
+'M_____T' (M ile baslayan T ile biten 7 harfli) (LIKE yerine ILIKE yazarsak büyük kücük harf önemsemeden arar.)*/
 /* customers tablosundaki firstname degeri M ile baslayanlari listeler. */
 
 show TIMEZONE;
@@ -108,4 +112,3 @@ SELECT firstname, lastname from "public"."customers" order by firstname;
 
 SELECT firstname, lastname from "public"."customers" order by firstname ASC, lastname DESC;
 /* customers tablosundaki firstname ve lastname'i alir, firstname'in alfabetik sirasina göre siralar.' */
-
