@@ -107,8 +107,11 @@ SELECT EXTRACT (year from interval '6 years 45 months'); /* month, day */
 SELECT DISTINCT age from "public"."customers";
 /* customers tablosundaki age sütununu tekrarlanan degerlerden kacinarak listeler. yani her value bir kez bastirilir. */
 
-SELECT firstname, lastname from "public"."customers" order by firstname;
-/* customers tablosundaki firstname ve lastname'i alir, firstname'in alfabetik sirasina göre siralar.' */
+SELECT first_name, last_name from employees order BY first_name;
+/* employees tablosundaki first_name ve last_name'i alir, first_name'in alfabetik sirasina göre siralar. */
 
-SELECT firstname, lastname from "public"."customers" order by firstname ASC, lastname DESC;
-/* customers tablosundaki firstname ve lastname'i alir, firstname'in alfabetik sirasina göre siralar.' */
+SELECT first_name, last_name from employees order BY first_name, last_name;
+/* böyle yaparsak her iki sütunu da kendi icinde alfabetik siraya göre siralar. */
+
+SELECT first_name, last_name from employees order BY first_name ASC, last_name DESC;
+/* employees tablosundaki first_name ve last_name'i alir, first_name'i alfabetik siraya, last_name'i alfabetik siranin tersine göre siralar. */
