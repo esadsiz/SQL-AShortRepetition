@@ -115,3 +115,26 @@ SELECT first_name, last_name from employees order BY first_name, last_name;
 
 SELECT first_name, last_name from employees order BY first_name ASC, last_name DESC;
 /* employees tablosundaki first_name ve last_name'i alir, first_name'i alfabetik siraya, last_name'i alfabetik siranin tersine göre siralar. */
+
+SELECT first_name, last_name from employees order BY length(first_name);
+/* employees tablosundaki first_name ve last_name'i alir, first_name'deki value'larin uzunluklarina göre (azdan coka) siralar. */
+
+SELECT employees.emp_no, salaries.salary from employees, salaries where employees.emp_no = salaries.emp_no order by employees.emp_no;
+/* employees tablosundan emp_no sütununu, salaries tablosundan salary sütununu al, "emp_no'lari ayni olduklari noktalarda bunlari bulustur, employees tablosunun emp_no sütununu baz alarak kücükten büyüge sirala." */
+/* BURADA AMAC, FARKLI TABLOLARDA AYNI emp_no'YA SAHIP VERILERi BULUSTURMAK */
+
+/* DAHA IYI BIR YOL */
+
+SELECT employees.emp_no, salaries.salary, salaries.from_date, titles.title FROM employees
+INNER JOIN salaries ON salaries.emp_no = employees.emp_no
+INNEr JOIN titles ON titles.emp_no = employees.emp_no and titles.from_date = salaries.from_date
+order by employees.emp_no ASC;
+/* employees tablosundan emp_no sütununu,
+   salaries tablosundan salary sütununu 
+   titles tablosunda title sütununu al,
+salaries'i employees'e bagla, emp_no'larinin ayni olduklari yerden.
+ona da titles'i bagla, emp_no'larinin ayni olduklari yerden ve from_date'lerinin ayni olduklari yerden.
+bunlari da employees'in emp_no'sunu baz alarak kücükten büyüge sirala." */
+
+/* BURADA AMAC, FARKLI TABLOLARI SAHIP OLDUKLARI ORTAK SÜTUNLARDAN TUTUP BIRBIRINE BAGLAMAK.
+YALNIZCA KESISIM NOKTALARINDAN, YANI BAGLANMAK ISTENEN SÜTUNLAR ARASINDA DENK GELMEYEN, ÖRTÜSMEYEN, ORTAK OLMAYAN BIR SATIR VARSA BU SATIR ALINMAZ. */
