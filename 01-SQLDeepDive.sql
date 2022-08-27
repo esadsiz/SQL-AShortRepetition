@@ -138,3 +138,26 @@ bunlari da employees'in emp_no'sunu baz alarak kücükten büyüge sirala." */
 
 /* BURADA AMAC, FARKLI TABLOLARI SAHIP OLDUKLARI ORTAK SÜTUNLARDAN TUTUP BIRBIRINE BAGLAMAK.
 YALNIZCA KESISIM NOKTALARINDAN, YANI BAGLANMAK ISTENEN SÜTUNLAR ARASINDA DENK GELMEYEN, ÖRTÜSMEYEN, ORTAK OLMAYAN BIR SATIR VARSA BU SATIR ALINMAZ. */
+
+/* BIR DE LEFT JOIN VE RIGHT JOIN VARDIR,
+LEFT JOIN, SOLDAKI TABLONUN DENK GELMEYEN, ÖRTÜSMEYEN SATIRLARINI DA, YANI TAMAMINI ALIR. / SONUNA WHERE sagtablo.key IS NULL EKLERSEK, KESISIMI DAHIL ETMEZ, A'NIN B'DEN FARKINI ALIR.
+RIGHT JOIN, SAGDAKI TABLONUN DENK GELMEYEN, ÖRTÜSMEYEN SATIRLARINI DA, YANI TAMAMINI ALIR. / SONUNA WHERE soltablo.key IS NULL EKLERSEK, KESISIMI DAHIL ETMEZ, B'NIN A'DAN FARKINI ALIR.
+
+FULL JOIN ISE HER IKI TABLONUN DA DENK GELMEYEN, ÖRTÜSMEYEN SATIRLARINI ALIR.
+
+AYRICA ON ....emp_no=...emp_no yerine; USING(emp_no) kullanabiliriz. (Bunlari emp_no'larindan birlestirir.)
+ */
+ 
+ create table "A" (id INT);
+ create table "B" (id INT);
+ 
+ insert into "A" values (1);
+ insert into "A" values (2);
+ insert into "A" values (3);
+ 
+ insert into "B" values (1);
+ insert into "B" values (2);
+ 
+ SELECT * FROM "A" cross join "B";
+ /* A tablosunun her bir satiri icin B tablosunun tamamini yazdir, bunlari da yanyana birlestir.
+ Yani ilk sütun 112233 seklinde giderken, buna karsilik öteki tablo 121212 seklinde gider. */
