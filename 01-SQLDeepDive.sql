@@ -95,47 +95,6 @@ SELECT * FROM "public"."customers" WHERE firstname LIKE 'M%';
 --
 --
 
-show TIMEZONE;
-/* Mevcut timezone'u gösterir.*/
-
-set TIME ZONE 'UTC'; 
-/* Yalnizca icinde bulunulan sessionun time zone'unu UTC olarak ayarlar.' */
-
-show TIMEZONE;
-/* Mevcut timezone'u gösterir.*/
-
-ALTER USER postgres SET timezone = 'UTC';
-/* Gecmis gelecek bütün sessionlarin timezone'unu UTC olarak ayarlar. */
-
-SELECT NOW()::date;
-/* her ikisi de simdinin tarihini verir.*/
-SELECT CURRENT_DATE;
-
-SELECT TO_CHAR(CURRENT_DATE, 'dd/mm/yyyy');
-/* Simdinin tarihini yazili formatta verir. */
-
-SELECT date '12/09/2015';
-/* yazili date'i verir */
-
-select AGE(date '26/09/1994');
-/* yazili tarihten bugüne kac yil kac ay gectigini verir. */
-
-select AGE(date '26/09/1994', date '01/04/2021');
-/* yazili tarihler arasi kac yil kac ay gectigini verir. */
-
-select EXTRACT(day from date '26/09/1994'); /* MONTH, YEAR */
-/* yazili tarihin gününü verir. */
-
-select DATE_TRUNC('year', date '26/09/1994'); /* month, day */
-/* yazili tarihin yili sabit kalir, ayi ve günü asagiya yuvarlanir. (01/01/1994) */
-
-SELECT EXTRACT (year from interval '6 years 45 months'); /* month, day */
-/* yazili zamana bakar, der ki 6 yil 45 ay 9 yil demektir, 9 bastirir. */
-
---
---
---
-
 SELECT first_name, last_name FROM employees ORDER BY first_name;
 /* employees tablosundaki first_name ve last_name'i alir, first_name'in alfabetik sirasina göre siralar. */
 
@@ -220,3 +179,64 @@ SELECT COUNT(emp_no), first_name FROM employees GROUP BY first_name
 union ALL
 SELECT COUNT(emp_no), last_name FROM employees GROUP BY last_name;
 -- UNION, tablolari alt alta birlestirir, yanina ALL eklersek kendini tekrar eden degerleri de yazdirir.
+
+--
+--
+--
+--
+--
+
+SHOW TIMEZONE;
+/* Mevcut timezone'u gösterir.*/
+
+set TIME ZONE 'UTC'; 
+/* Yalnizca icinde bulunulan sessionun time zone'unu UTC olarak ayarlar.' */
+
+ALTER USER postgres SET timezone = 'UTC';
+/* Gecmis gelecek bütün sessionlarin timezone'unu UTC olarak ayarlar. */
+
+SELECT NOW();
+-- Simdiyi verir. Günüyle, ayiyla, yiliyla, saatiyle, ...
+
+SELECT TIMEOFDAY();
+-- Simdiyi verir. Günüyle, ayiyla, yiliyla, saatiyle, ... ; fakat Sali, Mart 19 seklinde.
+
+SELECT CURRENT_TIME;
+-- Simdinin saatini dakikasini saniyesini ve salisesini verir.
+
+SELECT NOW()::date;
+/* her ikisi de simdinin tarihini verir.*/
+SELECT CURRENT_DATE;
+
+SELECT TO_CHAR(CURRENT_DATE, 'dd/mm/yyyy');
+/* Simdinin tarihini yazili formatta verir. */
+-- 'dd/mm/yyyy' yerine 'MONTH-YYYY' de yazilabilir. 
+
+SELECT date '12/09/2015';
+/* yazili date'i verir */
+
+select AGE(date '26/09/1994');
+/* yazili tarihten bugüne kac yil kac ay gectigini verir. */
+
+select AGE(date '26/09/1994', date '01/04/2021');
+/* yazili tarihler arasi kac yil kac ay gectigini verir. */
+
+select EXTRACT(day from date '26/09/1994'); /* MONTH, YEAR, QUARTER (kacinci ceyrekte oldugu.) */
+/* yazili tarihin gününü verir. */
+
+select * from payment where EXTRACT(dow from payment_date)= 1;
+-- yazili tarihin gününü 7'ye böler, böylece 1 sorgusunu yaparak Pazartesi filtresi yapabiliriz.
+
+select DATE_TRUNC('year', date '26/09/1994'); /* month, day */
+/* yazili tarihin yili sabit kalir, ayi ve günü asagiya yuvarlanir. (01/01/1994) */
+
+SELECT EXTRACT (year from interval '6 years 45 months'); /* month, day */
+/* yazili zamana bakar, der ki 6 yil 45 ay 9 yil demektir, 9 bastirir. */
+
+--
+--
+--
+
+SELECT rental_rate/replacement_cost from film;
+-- sütun degerlerini birbirine böler. (* + - da kullanilabilir.)
+
