@@ -8,11 +8,6 @@ SELECT birth_date, COUNT(emp_no) FROM "public"."employees" GROUP BY birth_date H
 SELECT birth_date, gender, count(emp_no) from "public"."employees" group by birth_date, gender HAVING EXTRACT(YEAR from birth_date)>1964 order by birth_date;
 -- GROUP BY'a gender'i da ekledik. Filtreleme islemi bu sekilde parametrelere de bölünebilir. Burada "birth_date yili 1964ten fazla olanlari, erkek ve kadin olarak ayirmis olduk."
 
-SELECT count(emp_no), first_name FROM employees group by first_name
-union ALL
-SELECT count(emp_no), last_name from employees group by last_name;
--- UNION, tablolari alt alta birlestirir, yanina ALL eklersek kendini tekrar eden degerleri de yazdirir.
-
 SELECT count(emp_no), first_name, last_name FROM employees group by grouping sets(first_name, last_name);
 -- GROUPING SETS'i pek anlayamadim, ama burada iki farkli tabloyu yukaridaki gibi uzun uzun yazmaksizin bu sekilde yanyana bagladik.
 
