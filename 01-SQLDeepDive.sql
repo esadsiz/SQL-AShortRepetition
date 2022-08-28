@@ -68,7 +68,10 @@ SELECT SUM(salary) FROM salaries;
 
 SELECT COUNT(emp_no) FROM employees;
 /* employees tablosunun emp_no sütununun tekrarlanan degerlerden kacinarak listeler. yani her value bir kez bastirilir. */
--- COUNT (DISTINCT emp_no) yaparsak, birbirinden farkli kac adet value'ya sahip oldugunu gösterir. 
+-- COUNT (DISTINCT emp_no) yaparsak, birbirinden farkli kac adet value'ya sahip oldugunu gösterir.
+
+-- Bunlarin basina ROUND getirirsek de, örnegin ROUND(SUM(salary)), virgülden sonraki değer 5 ten küçükse asagiya;
+-- 5 ve 5 ten büyükse; yukariya yuvarlanır. ROUND(sayi, 2) ise, virgülden sonra kac basamagin var olacagini belirler.
 
 --
 --
