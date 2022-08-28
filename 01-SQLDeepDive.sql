@@ -208,3 +208,15 @@ RIGHT JOIN, SAGDAKI TABLONUN DENK GELMEYEN, ÖRTÜSMEYEN SATIRLARINI DA, YANI TA
  SELECT *, max(salary) over() from salaries limit 100;
 -- OVER() ile normalde tek satirdan olusan max(salary) tablomuzu her satira dagittik.
 -- LIMIT 100 ile tablonun satir limitini 100 olarak belirledik.
+
+--
+--
+--
+--
+--
+
+-- UNION --
+SELECT COUNT(emp_no), first_name FROM employees GROUP BY first_name
+union ALL
+SELECT COUNT(emp_no), last_name FROM employees GROUP BY last_name;
+-- UNION, tablolari alt alta birlestirir, yanina ALL eklersek kendini tekrar eden degerleri de yazdirir.
