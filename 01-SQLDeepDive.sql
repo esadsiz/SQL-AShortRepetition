@@ -161,3 +161,7 @@ AYRICA ON ....emp_no=...emp_no yerine; USING(emp_no) kullanabiliriz. (Bunlari em
  SELECT * FROM "A" cross join "B";
  /* A tablosunun her bir satiri icin B tablosunun tamamini yazdir, bunlari da yanyana birlestir.
  Yani ilk sütun 112233 seklinde giderken, buna karsilik öteki tablo 121212 seklinde gider. */
+ 
+ SELECT *, max(salary) over() from salaries limit 100;
+-- OVER() ile normalde tek satirdan olusan max(salary) tablomuzu her satira dagittik.
+-- LIMIT 100 ile tablonun satir limitini 100 olarak belirledik.
