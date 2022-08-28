@@ -154,10 +154,17 @@ SELECT employees.emp_no, salaries.salary FROM employees, salaries WHERE employee
 
 /* DAHA IYI BIR YOL */
 
+--
+--
+--
+--
+--
+
+-- JOINS --
 SELECT employees.emp_no, salaries.salary, salaries.from_date, titles.title FROM employees
 INNER JOIN salaries ON salaries.emp_no = employees.emp_no
-INNEr JOIN titles ON titles.emp_no = employees.emp_no and titles.from_date = salaries.from_date
-order by employees.emp_no ASC;
+INNER JOIN titles ON titles.emp_no = employees.emp_no AND titles.from_date = salaries.from_date
+ORDER BY employees.emp_no ASC;
 /* employees tablosundan emp_no sütununu,
    salaries tablosundan salary sütununu 
    titles tablosunda title sütununu al,
@@ -166,16 +173,19 @@ ona da titles'i bagla, emp_no'larinin ayni olduklari yerden ve from_date'lerinin
 bunlari da employees'in emp_no'sunu baz alarak kücükten büyüge sirala." */
 
 /* BURADA AMAC, FARKLI TABLOLARI SAHIP OLDUKLARI ORTAK SÜTUNLARDAN TUTUP BIRBIRINE BAGLAMAK.
-YALNIZCA KESISIM NOKTALARINDAN, YANI BAGLANMAK ISTENEN SÜTUNLAR ARASINDA DENK GELMEYEN, ÖRTÜSMEYEN, ORTAK OLMAYAN BIR SATIR VARSA BU SATIR ALINMAZ. */
+YALNIZCA KESISIM NOKTALARINDAN. YANI BAGLANMAK ISTENEN SÜTUNLAR ARASINDA DENK GELMEYEN, ÖRTÜSMEYEN, ORTAK OLMAYAN BIR SATIR VARSA BU SATIR ALINMAZ. */
+
+-- BU HER IKI TABLONUN DA TAMAMINI ALIR.
+SELECT * from customer FULL OUTER JOIN payment USING(customer_id);
+
+-- BU, HER IKI TABLONUN DA DENK GELMEYEN, ÖRTÜSMEYEN SATIRLARINI ALIR.
+SELECT * from customer FULL OUTER JOIN payment USING(customer_id) where customer_id is null or payment_id is null;
+
+-- AYRICA GÖRÜLDÜGÜ GIBI ON ....emp_no=...emp_no yerine; USING(emp_no) kullanabiliriz. (Tablolari emp_no'larindan birlestirir.)
 
 /* BIR DE LEFT JOIN VE RIGHT JOIN VARDIR,
 LEFT JOIN, SOLDAKI TABLONUN DENK GELMEYEN, ÖRTÜSMEYEN SATIRLARINI DA, YANI TAMAMINI ALIR. / SONUNA WHERE sagtablo.key IS NULL EKLERSEK, KESISIMI DAHIL ETMEZ, A'NIN B'DEN FARKINI ALIR.
-RIGHT JOIN, SAGDAKI TABLONUN DENK GELMEYEN, ÖRTÜSMEYEN SATIRLARINI DA, YANI TAMAMINI ALIR. / SONUNA WHERE soltablo.key IS NULL EKLERSEK, KESISIMI DAHIL ETMEZ, B'NIN A'DAN FARKINI ALIR.
-
-FULL JOIN ISE HER IKI TABLONUN DA DENK GELMEYEN, ÖRTÜSMEYEN SATIRLARINI ALIR.
-
-AYRICA ON ....emp_no=...emp_no yerine; USING(emp_no) kullanabiliriz. (Bunlari emp_no'larindan birlestirir.)
- */
+RIGHT JOIN, SAGDAKI TABLONUN DENK GELMEYEN, ÖRTÜSMEYEN SATIRLARINI DA, YANI TAMAMINI ALIR. / SONUNA WHERE soltablo.key IS NULL EKLERSEK, KESISIMI DAHIL ETMEZ, B'NIN A'DAN FARKINI ALIR. */
  
  --
  --
