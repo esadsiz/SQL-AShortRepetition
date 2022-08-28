@@ -14,6 +14,12 @@ SELECT emp_no as "Employee #", birth_date as "Birthday", first_name as "First Na
 /* employees tablosundaki emp_no sütununun adini "Employee #", 
                           birth_date sütununun adini "Birthday",
                           first_name sütununun adini "First Name" olarak yazdir. */
+                          
+SELECT DISTINCT rental_rate from film;
+/* film tablosundaki "rental_rate" sütununu kendini tekrar eden bir value olmadan göster. */
+
+SELECT rental_rate from film LIMIT 5;
+/* Listelenecek tablonun satir sayisini 5 olarak limitler. */
 
 SELECT CONCAT(emp_no, ' is a ', title) as "Employee Title" from "public"."titles";
 /* titles tablosundaki her bir satir icin, emp_no ve title sütunlarindaki degerleri alir ve parantez icinde yazili cümleyi satir satir tablo seklinde yazdirir,
@@ -22,17 +28,7 @@ olusturulan bu yeni tablonun adini da "Employee Title" koyar */
 SELECT emp_no, CONCAT(emp_no, ' is a ', title) as "Employee Title" from "public"."titles";
 /* Bu ise ilk sütun olarak emp_no sütununu belirler, ikinci sütun olarak yanina Employee Title isimli sütunu yerlestirir. */
 
-SELECT count(emp_no) FROM "public"."employees";
-/* employees tablosunun emp_no sütununun kac adet degere sahip oldugunu tek satir tek sütun tablo seklinde yazdirir. */
 
-SELECT min(emp_no) FROM "public"."employees";
-/* employees tablosunun emp_no sütununun sahip oldugu minimum degeri tek satir tek sütun tablo seklinde yazdirir. */
-
-SELECT max(emp_no) FROM "public"."employees";
-/* employees tablosunun emp_no sütununun sahip oldugu maximum degeri tek satir tek sütun tablo seklinde yazdirir. */
-
-SELECT sum(salary) FROM "public"."salaries";
-/* salaries tablosunun salary sütununun sahip oldugu tüm degeleri toplar, tek satir tek sütun tablo seklinde yazdirir. */
 
 SELECT first_name, last_name from "public"."employees"
 WHERE (first_name = 'Mayumi' AND last_name = 'Schueller')
@@ -53,19 +49,48 @@ SELECT * FROM "public"."customers" where age is not null; /* NULL / TRUE / FALSE
 SELECT coalesce(firstname, 'no firstname available'), lastname from "public"."customers";
 /* coalesce firsname sütunundaki null degerleri yakalar ve yerlerine null degeri yerine 2. parametrede yazili mesaji bastirir.' */
 
-SELECT sum(coalesce(age, 50)) from "public"."customers";
+--
+--
+--
+
+SELECT SUM(COALESCE(age, 50)) FROM customers;
 /* coalesce age sütunundaki null degerleri yakalar ve degerlerini 50 ile degistirir, ardindan bunlar sum ile toplanir. */
+-- ayrica AVG(), COUNT(), MAX(), MIN() gibi foksiyonlar da mevcuttur.
 
-SELECT * from "public"."customers" WHERE age BETWEEN 55 and 66;
+SELECT MIN(emp_no) FROM employees;
+/* employees tablosunun emp_no sütununun sahip oldugu minimum degeri tek satir tek sütun tablo seklinde yazdirir. */
+
+SELECT MAX(emp_no) FROM employees;
+/* employees tablosunun emp_no sütununun sahip oldugu maximum degeri tek satir tek sütun tablo seklinde yazdirir. */
+
+SELECT SUM(salary) FROM salaries;
+/* salaries tablosunun salary sütununun sahip oldugu tüm degeleri toplar, tek satir tek sütun tablo seklinde yazdirir. */
+
+SELECT COUNT(emp_no) FROM employees;
+/* employees tablosunun emp_no sütununun tekrarlanan degerlerden kacinarak listeler. yani her value bir kez bastirilir. */
+-- COUNT (DISTINCT emp_no) yaparsak, birbirinden farkli kac adet value'ya sahip oldugunu gösterir. 
+
+--
+--
+--
+
+SELECT * FROM "public"."customers" WHERE age BETWEEN 55 AND 66;
 /* customers tablosundaki age degeri 55 ile 66 arasinda (dahil) olanlari listeler. */
+-- BETWEEN'den önce NOT da eklenebilir.
 
-SELECT * from "public"."customers" WHERE age in (55, 66, 77, 88);
+SELECT * FROM "public"."customers" WHERE age IN (55, 66, 77, 88);
 /* customers tablosundaki age degeri 55, 66, 77, 88 olanlari listeler. */
+-- IN'den önce NOT da eklenebilir.
 
-SELECT * from "public"."customers" WHERE firstname like 'M%';
+SELECT * FROM "public"."customers" WHERE firstname LIKE 'M%';
 /* '%M', '%M%', '_MA%', 'M_%_%' (M ile baslayan ve en az üc basamaga sahip),
 'M_____T' (M ile baslayan T ile biten 7 harfli) (LIKE yerine ILIKE yazarsak büyük kücük harf önemsemeden arar.)*/
 /* customers tablosundaki firstname degeri M ile baslayanlari listeler. */
+-- LIKE'dan önce NOT da eklenebilir.
+
+--
+--
+--
 
 show TIMEZONE;
 /* Mevcut timezone'u gösterir.*/
@@ -104,22 +129,23 @@ select DATE_TRUNC('year', date '26/09/1994'); /* month, day */
 SELECT EXTRACT (year from interval '6 years 45 months'); /* month, day */
 /* yazili zamana bakar, der ki 6 yil 45 ay 9 yil demektir, 9 bastirir. */
 
-SELECT DISTINCT age from "public"."customers";
-/* customers tablosundaki age sütununu tekrarlanan degerlerden kacinarak listeler. yani her value bir kez bastirilir. */
+--
+--
+--
 
-SELECT first_name, last_name from employees order BY first_name;
+SELECT first_name, last_name FROM employees ORDER BY first_name;
 /* employees tablosundaki first_name ve last_name'i alir, first_name'in alfabetik sirasina göre siralar. */
 
-SELECT first_name, last_name from employees order BY first_name, last_name;
+SELECT first_name, last_name FROM employees ORDER BY first_name, last_name;
 /* böyle yaparsak her iki sütunu da kendi icinde alfabetik siraya göre siralar. */
 
-SELECT first_name, last_name from employees order BY first_name ASC, last_name DESC;
+SELECT first_name, last_name FROM employees ORDER BY first_name ASC, last_name DESC;
 /* employees tablosundaki first_name ve last_name'i alir, first_name'i alfabetik siraya, last_name'i alfabetik siranin tersine göre siralar. */
 
-SELECT first_name, last_name from employees order BY length(first_name);
+SELECT first_name, last_name FROM employees ORDER BY length(first_name);
 /* employees tablosundaki first_name ve last_name'i alir, first_name'deki value'larin uzunluklarina göre (azdan coka) siralar. */
 
-SELECT employees.emp_no, salaries.salary from employees, salaries where employees.emp_no = salaries.emp_no order by employees.emp_no;
+SELECT employees.emp_no, salaries.salary FROM employees, salaries WHERE employees.emp_no = salaries.emp_no ORDER BY employees.emp_no;
 /* employees tablosundan emp_no sütununu, salaries tablosundan salary sütununu al, "emp_no'lari ayni olduklari noktalarda bunlari bulustur, employees tablosunun emp_no sütununu baz alarak kücükten büyüge sirala." */
 /* BURADA AMAC, FARKLI TABLOLARDA AYNI emp_no'YA SAHIP VERILERi BULUSTURMAK */
 
@@ -147,6 +173,10 @@ FULL JOIN ISE HER IKI TABLONUN DA DENK GELMEYEN, ÖRTÜSMEYEN SATIRLARINI ALIR.
 
 AYRICA ON ....emp_no=...emp_no yerine; USING(emp_no) kullanabiliriz. (Bunlari emp_no'larindan birlestirir.)
  */
+ 
+ --
+ --
+ --
  
  create table "A" (id INT);
  create table "B" (id INT);
