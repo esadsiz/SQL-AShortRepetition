@@ -108,7 +108,8 @@ SELECT first_name, last_name FROM employees ORDER BY length(first_name);
 /* employees tablosundaki first_name ve last_name'i alir, first_name'deki value'larin uzunluklarina göre (azdan coka) siralar. */
 
 SELECT employees.emp_no, salaries.salary FROM employees, salaries WHERE employees.emp_no = salaries.emp_no ORDER BY employees.emp_no;
-/* employees tablosundan emp_no sütununu, salaries tablosundan salary sütununu al, "emp_no'lari ayni olduklari noktalarda bunlari bulustur, employees tablosunun emp_no sütununu baz alarak kücükten büyüge sirala." */
+/* employees tablosundan emp_no sütununu, salaries tablosundan salary sütununu al, "emp_no'lari ayni olduklari noktalarda bunlari bulustur,
+   employees tablosunun emp_no sütununu baz alarak kücükten büyüge sirala." */
 /* BURADA AMAC, FARKLI TABLOLARDA AYNI emp_no'YA SAHIP VERILERi BULUSTURMAK */
 
 /* DAHA IYI BIR YOL */
@@ -240,3 +241,10 @@ SELECT EXTRACT (year from interval '6 years 45 months'); /* month, day */
 SELECT rental_rate/replacement_cost from film;
 -- sütun degerlerini birbirine böler. (* + - da kullanilabilir.)
 
+SELEct upper(first_name) || '' || lower(last_name) from customer;
+-- sütundaki degerleri alir, tek bir sütunda yanyana koyar, yani birlestirir.
+-- upper, string degeri büyük harfle yazdirir.
+-- lower, string degeri kücük harfliye cevirir.
+
+SELEct LEFT(first_name, 1) || '' || last_name from customer;
+-- upper, string degerin yalnizca soldan ilk(1,2,3) basamagini alir.
