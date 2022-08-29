@@ -238,13 +238,18 @@ SELECT EXTRACT (year from interval '6 years 45 months'); /* month, day */
 --
 --
 
-SELECT rental_rate/replacement_cost from film;
+SELECT rental_rate/replacement_cost FROM film;
 -- sütun degerlerini birbirine böler. (* + - da kullanilabilir.)
 
-SELEct upper(first_name) || '' || lower(last_name) from customer;
+SELECT upper(first_name) || '' || lower(last_name) FROM customer;
 -- sütundaki degerleri alir, tek bir sütunda yanyana koyar, yani birlestirir.
 -- upper, string degeri büyük harfle yazdirir.
 -- lower, string degeri kücük harfliye cevirir.
 
-SELEct LEFT(first_name, 1) || '' || last_name from customer;
+SELECT LEFT(first_name, 1) || '' || last_name FROM customer;
 -- upper, string degerin yalnizca soldan ilk(1,2,3) basamagini alir.
+-- Bir de RIGHT vardir, o da ayni seyi sagdan yapar.
+-- LEN(first_name) ise sütundaki degerlerin karakter sayisini tablolar.
+-- TRIM(first_name) sütundaki degerlerin (varsa) baslarindaki ve sonlarindaki fazlalik bosluklari kaldirir.
+-- LTRIM degerin solundaki, RTRIM degerin sagindaki bosluklari kaldirir.
+-- REVERSE(first_name) sütundaki degerleri tersten yazdirir.
