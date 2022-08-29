@@ -253,3 +253,5 @@ SELECT LEFT(first_name, 1) || '' || last_name FROM customer;
 -- TRIM(first_name) sütundaki degerlerin (varsa) baslarindaki ve sonlarindaki fazlalik bosluklari kaldirir.
 -- LTRIM degerin solundaki, RTRIM degerin sagindaki bosluklari kaldirir.
 -- REVERSE(first_name) sütundaki degerleri tersten yazdirir.
+-- CHARINDEX('e', first_name, 2) e'nin (ya da herhangi bir kelimenin), söz konusu degerin 2. basamagindan itibaren kacinci sirada oldugunu yazdirir.
+
