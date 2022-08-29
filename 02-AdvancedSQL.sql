@@ -1,6 +1,6 @@
 SELECT dept_no, COUNT(emp_no) FROM dept_emp GROUP BY dept_no;
 -- her bir dept_no degeri icin tabloya o dept_no'nun kendisini ve karsisina o dept_no'nun kac adet emp_no'ya sahip oldugunu yazdirir.
--- SUM(), AVG() COUNT() AGG() fonksiyonlari ile de kullanilabilir
+-- Burada, yazili count fonksiyonu her dept_no grubu(cinsi) icin ayri calisir. SUM(), AVG() COUNT() AGG() fonksiyonlari ile de kullanilabilir.
 
 SELECT birth_date, COUNT(emp_no) FROM "public"."employees" GROUP BY birth_date HAVING EXTRACT(YEAR FROM birth_date)>1964 ORDER BY birth_date;
 -- HAVING ise GROUP BY ile kullanilan bir filtreleme islemidir.
