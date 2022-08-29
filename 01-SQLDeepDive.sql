@@ -125,15 +125,12 @@ SELECT employees.emp_no, salaries.salary, salaries.from_date, titles.title FROM 
 INNER JOIN salaries ON salaries.emp_no = employees.emp_no
 INNER JOIN titles ON titles.emp_no = employees.emp_no AND titles.from_date = salaries.from_date
 ORDER BY employees.emp_no ASC;
-/* employees tablosundan emp_no sütununu,
-   salaries tablosundan salary sütununu 
-   titles tablosunda title sütununu al,
-salaries'i employees'e bagla, emp_no'larinin ayni olduklari yerden.
+/* salaries'i employees'e bagla, emp_no'larinin ayni olduklari yerden.
 ona da titles'i bagla, emp_no'larinin ayni olduklari yerden ve from_date'lerinin ayni olduklari yerden.
 bunlari da employees'in emp_no'sunu baz alarak kücükten büyüge sirala." */
 
-/* BURADA AMAC, FARKLI TABLOLARI SAHIP OLDUKLARI ORTAK SÜTUNLARDAN TUTUP BIRBIRINE BAGLAMAK.
-YALNIZCA KESISIM NOKTALARINDAN. YANI BAGLANMAK ISTENEN SÜTUNLAR ARASINDA DENK GELMEYEN, ÖRTÜSMEYEN, ORTAK OLMAYAN BIR SATIR VARSA BU SATIR ALINMAZ. */
+/* BURADA AMAC, FARKLI TABLOLARI SAHIP OLDUKLARI ORTAK SÜTUNLARIN ESLESEN DEGERLERINDEN YAKALAYIP BIRBIRINE BAGLAMAK.
+YALNIZCA ESLESEN NOKTALARINDAN. YANI BAGLANMAK ISTENEN SÜTUNLAR ARASINDA DENK GELMEYEN, ÖRTÜSMEYEN, ORTAK OLMAYAN BIR SATIR VARSA BU SATIR ALINMAZ. */
 
 -- BU HER IKI TABLONUN DA TAMAMINI ALIR.
 SELECT * from customer FULL OUTER JOIN payment USING(customer_id);
