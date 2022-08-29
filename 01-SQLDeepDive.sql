@@ -254,4 +254,7 @@ SELECT LEFT(first_name, 1) || '' || last_name FROM customer;
 -- LTRIM degerin solundaki, RTRIM degerin sagindaki bosluklari kaldirir.
 -- REVERSE(first_name) sütundaki degerleri tersten yazdirir.
 -- CHARINDEX('e', first_name, 2) e'nin (ya da herhangi bir kelimenin), söz konusu degerin 2. basamagindan itibaren kacinci sirada oldugunu yazdirir.
-
+-- REPLACE(first_name, ' ', '_') söz konusu degerin icindeki bosluklari alt cizgi ile degistir.
+-- SUBSTRING(first_name, 1, 5) söz konusu degeri, 1. karakterden itibaren 5. karakterine kadar alir, gerisini atar.
+-- ASCII('A') Büyük A'nin ASCII karsiligini bastirir.
+-- CHAR(65) Icerisine yazili ASCII numarasinin harf karsiligini verir.
