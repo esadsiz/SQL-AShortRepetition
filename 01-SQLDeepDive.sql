@@ -174,9 +174,11 @@ RIGHT JOIN, SAGDAKI TABLONUN DENK GELMEYEN, ÖRTÜSMEYEN SATIRLARINI DA, YANI TA
 
 -- UNION --
 SELECT COUNT(emp_no), first_name FROM employees GROUP BY first_name
-union ALL
+UNION ALL
 SELECT COUNT(emp_no), last_name FROM employees GROUP BY last_name;
--- UNION, tablolari alt alta birlestirir, yanina ALL eklersek kendini tekrar eden degerleri de yazdirir.
+-- UNION, tablolari alt alta birlestirir, alta gelecek tabloyu üste baglarken yalnizca farkli olan satirlari alinir.
+-- Yanina ALL eklersek ise kendini tekrar eden degerleri de yazdirir.
+-- Satün sayilarinin ayni olmasi sarti vardir.
 
 --
 --
