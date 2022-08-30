@@ -46,19 +46,13 @@ SELECT * from "public"."customers" WHERE not age = 55;
 SELECT * FROM "public"."customers" where age is not null; /* NULL / TRUE / FALSE */
 /* customers tablosundaki age degeri NULL olmayanlari listeler. */
 
-SELECT coalesce(firstname, 'no firstname available'), lastname from "public"."customers";
-/* coalesce firsname sütunundaki null degerleri yakalar ve yerlerine null degeri yerine 2. parametrede yazili mesaji bastirir.' */
-
 --
 --
 --
-
-SELECT SUM(COALESCE(age, 50)) FROM customers;
-/* coalesce age sütunundaki null degerleri yakalar ve degerlerini 50 ile degistirir, ardindan bunlar sum ile toplanir. */
--- ayrica AVG(), COUNT(), MAX(), MIN() gibi foksiyonlar da mevcuttur.
 
 SELECT MIN(emp_no) FROM employees;
 /* employees tablosunun emp_no sütununun sahip oldugu minimum degeri tek satir tek sütun tablo seklinde yazdirir. */
+-- ayrica AVG(), COUNT(), MAX(), MIN() gibi foksiyonlar da mevcuttur.
 
 SELECT MAX(emp_no) FROM employees;
 /* employees tablosunun emp_no sütununun sahip oldugu maximum degeri tek satir tek sütun tablo seklinde yazdirir. */
