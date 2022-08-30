@@ -10,6 +10,8 @@ username VARCHAR(50) UNIQUE not NULL,
 -- Bir de CHAR(10) vardir, bu da degerin örnegin tam olarak 10 karakterden olusmasi gerektigini belirtir. 
 -- UNIQUE ayni degere sadece bir kez sahip olabilir.
 -- NOT NULL bos birakilamaz.
+ 
+-- Sayilar icin INT vardir. Booleanlar icin BIT vardir.
 PASSWORD VARCHAR(50) not null,
 email VARCHAR(50) UNIQUE not NULL,
 created_on TIMESTAMP not NULL,
@@ -24,9 +26,14 @@ CREATE TABLE job(
 
 CREATE TABLE account_job(
     user_id INTEGER REFERENCES account(user_id),
+    -- Bu user_id sütunu account tablosunun user_id'si ile ayni olmali.
+    -- Dolayisiyla account tablosunun user_id sütununu referans al diye belirtiriz.
     job_id INTEGER REFERENCES job(job_id),
     hire_date TIMESTAMP
 )
+-- Böylece account ve job tablolarindan referans alan account_job adinda araci bir tablo oluşturduk.
+
+Tablo oluştur diyeceğiz.
 
 --
 --
@@ -36,9 +43,8 @@ CREATE TABLE account_job(
 
 INSERT INTO account(username, password, email, created_on)
 -- INSERT tabloya yeni bir kayit eklemek icin kullanilir.
--- Hangi tabloya? account tablosuna.
--- Parantez icine de hangi alanlara kayit eklemek istiyorsak onlari yaziyoruz.
-VALUES ('Enes', 'enes123', 'enes@mail.com', current_timestamp)
+-- Hangi tabloya? account tablosuna. Parantez icine de hangi alanlara kayit eklemek istiyorsak onlari yaziyoruz.
+VALUES ('Enes', 'enes123', 'enes@mail.com', CURRENT_TIMESTAMP)
 -- kayitlara eklenecek degerler de sirasiyla bu sekilde yazilir.
 
 INSERT INTO CustomersWork (CustomerId, CompanyName, ContactName) SELECT CustomerId, CompanyName, ContactName from Customers;
@@ -47,6 +53,8 @@ INSERT INTO CustomersWork (CustomerId, CompanyName, ContactName) SELECT Customer
 
 INSERT INTO account_job(user_id, job_id, hire_date)
 VALUES (1, 1, current_timestamp)
+-- account_job isimli referans tablomuzun user_id sütununa, account tablosunun 1 numarali user_id'sini ata.
+-- job_id ile de ayni seyi yap. sonra da bunlarin yanina zaman damgasini yapistir. 
 
 --
 --
@@ -65,6 +73,7 @@ UPDATE Customers SET CompanyName = CustomersWork.CompanyName FROM Customers INNE
 -- Komut satirinin sonuna bir de WHERE CustomersWork.CompanyName LIKE '%TEST%'; eklersek, sadece bu sarta uyan satirlari alir koyar.
 
 UPDATE account SET last_login = CURRENT_TIMESTAMP RETURNING last_login;
+-- RETURNING ise yapilan islem sonrasi konsolda görmek istedigimiz yazili sütunlari basar. 
 
 --
 --
@@ -74,6 +83,7 @@ UPDATE account SET last_login = CURRENT_TIMESTAMP RETURNING last_login;
 
 DELETE FROM account WHERE username = 'enes';
 -- DELETE veritabaninda sarta uyan kayitlari silmek icin kullanilir.
+-- username'in 'enes' oldugu satiri sil.
 
 DELETE Customers FROM Customers INNER JOIN CustomersWork USING(CustomerID) WHERE CustomersWork.CompanyName LIKE '%TEST%';
 
