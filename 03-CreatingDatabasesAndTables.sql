@@ -94,4 +94,36 @@ DELETE Customers FROM Customers INNER JOIN CustomersWork USING(CustomerID) WHERE
 -- ALTER
 
 ALTER TABLE information RENAME TO new_info;
-ALTER TABLE information RENAME COLUMN person TO personal;
+-- information tablosunun adini new_info olarak degistir.
+
+ALTER TABLE information RENAME COLUMN person TO people;
+-- information tablosunun person sütununun adini people olarak degistir.
+
+ALTER TABLE new_info ALTER COLUMN people DROP NOT NULL;
+-- new_info tablosunun people sütunundan NOT NULL kuralini kaldirir.
+-- bu islemin tam tersi ise DROP yerine SET yazmaktir.
+
+ALTER TABLE new_info DROP COLUMN;
+-- new_info tablosundan people sütununu kaldirir.
+-- bu islemin tam tersi ise DROP yerine SET yazmaktir.
+-- COLUMN'dan önce IF EXISTS yazarsak, eger mevcutsa demis oluruz.
+
+--
+--
+--
+
+-- CHECK
+
+CREATE TABLE account
+(user_id SERIAL PRIMARY KEY,
+username VARCHAR(50) UNIQUE not NULL,
+--..
+--..
+--..
+birthdate DATE CHECK (birthdate > '1900-01-01'),
+hiredate DATE CHECK (hire_date > birthdate),
+salary INTEGER CHECK (salary > 0)     
+);
+-- CHECK, tablo olustururken sütuna sart getirmek icin kullanilir.
+-- Örnegin burada girilecek dogum tarihi 1900-01-01 öncesi olamaz.
+-- Maas, negatif sayi olamaz.
