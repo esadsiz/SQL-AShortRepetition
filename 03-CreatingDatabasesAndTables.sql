@@ -1,4 +1,4 @@
--- CREATE TABLE
+-- CREATING TABLE
 
 CREATE TABLE account
 -- tablo ismi 'account'
