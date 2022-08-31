@@ -46,3 +46,23 @@ SELECT SUM(COALESCE(age, 50)) FROM customers;
 
 SELECT CAST('5' AS INTEGER)
 SELECT '10'::INTEGER
+-- 5 stringini integer tipine cevirir.
+
+--
+--
+--
+
+-- NULLIF
+
+SELECT Magaza_Adi, NULLIF (Gercek, Hedef) FROM Satis_Verisi;
+-- NULLIF, parantez icerisine yazili iki degeri karsilastirir, aynilar ise NULL yazdirir, degiller ise 1. parametredeki degeri yazdirir.
+
+--
+--
+--
+
+-- VIEW
+
+-- Create View : Yeni view oluşturmak için kullanılır.
+-- Alter View : Daha önceden oluşturulmuş bir view üzerinde değişiklik yapılmak için kullanılır.
+-- Drop View : Daha önceden oluşturulmuş bir view i veritabanından silmek için kullanılır.
